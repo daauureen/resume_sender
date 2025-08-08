@@ -39,11 +39,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	// хеш
 	hashBytes := sha256.Sum256([]byte(*cvURL))
 	hash := hex.EncodeToString(hashBytes[:])
 
-	// user_id = первые 8 символов + 4 случайных
 	rand.Seed(time.Now().UnixNano())
 	letters := []rune("abcdefghijklmnopqrstuvwxyz0123456789")
 	randomPart := make([]rune, 4)
@@ -52,7 +50,6 @@ func main() {
 	}
 	userID := fmt.Sprintf("%s-%s", hash[:8], string(randomPart))
 
-	// json отчёт
 	report := Report{
 		CVURL:     *cvURL,
 		Hash:      hash,
@@ -75,11 +72,10 @@ func main() {
 
 	fmt.Println("json отчёт создан:", jsonFileName)
 
-	// отправка email
 	e := email.NewEmail()
 	e.From = *emailAddr
 	e.To = []string{"szhaisan@wtotem.com"}
-	e.Subject = "ТЗ – " + userID
+	e.Subject = "Golang test – " + userID
 	e.Text = []byte("автоматическая отправка отчёта")
 
 	_, err = e.AttachFile(jsonFileName)
