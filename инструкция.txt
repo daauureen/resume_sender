@@ -1,0 +1,25 @@
+чтоб запустить программу нужно
+
+прописать в powershell (я писал на vscode) следующие команды в терминале:
+
+1) сначала перейдем в каталог проекта в моем случае это cd C:\Users\user\Documents\Go_projects\resume_sender
+
+2) go mod init resume_sender (это название мое)
+
+3) потом я использовал библотеку "github.com/jordan-wright/email" устанавливаем зависимости
+go get github.com/jordan-wright/email
+
+4) потом перед запуском — включить SMTP в gmail
+зашел в google app passwords
+cоздать пароль приложения для «Mail» → «Windows Computer»
+cкопировать пароль (он вида xxxx xxxx xxxx xxxx)
+этот пароль и будет значением для --smtp-password.
+мой пароль сгенерированный ypdl yprc tzme yncm
+
+далее команда
+5) go run main.go --cv-url=https://astana.hh.kz/resume/c34cbb24ff09a340310039ed1f457276644445 --email=daurenbolatofficial@gmail.com --smtp-login=daurenbolatofficial@gmail.com --smtp-password="ypdl yprc tzme yncm" --smtp-server=smtp.gmail.com --smtp-port=587
+
+6) еще нужно создать зип архив если его нету. моэно прописать в powershell
+powershell Compress-Archive -Path * -DestinationPath source_code.zip
+
+
